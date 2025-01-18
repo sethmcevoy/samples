@@ -1,3 +1,17 @@
 .title {
 	color: green;
 }
+
+.under {
+	position: absolute; 
+	bottom: 20px; 
+	left: 20px; 
+	z-index: 10;
+}
+
+.fence {
+	  margin-top: 20px;
+	  margin-bottom: 20px;
+	  margin-right: 20px;
+	  margin-left: 20px;
+}
