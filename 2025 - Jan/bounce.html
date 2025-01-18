@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html style="overflow: hidden;">
+
+<head>
+
+  <meta charset="UTF-8">
+  <title>
+    New CSS Shell with Height and Width
+  </title>
+
+  <style>
+    #circle {
+      width: 20px;
+      height: 20px;
+      top: 200px;
+      left: 100px;
+      position: absolute;
+      background: red;
+      border-radius: 50px;
+    }
+  </style>
+
+  <div id="circle"></div>
+
+  <script>
+    // Global variables
+    var boardWidth = window.innerWidth;
+    var boardHeight = window.innerHeight;
+    var ballHor = boardWidth / 2;
+    var ballVer = boardHeight / 2;
+    var changeHor = 10;
+    var changeVer = 10;
+
+     // Load event listener
+    window.addEventListener("load",
+      getLoaded, false);
+
+     // Resize event listener
+    window.addEventListener("resize",
+      resizeMe, false);
+
+     // Get ball information.
+    var myBall =
+      document.querySelector("#circle");
+
+     // Function called on page load.
+    function getLoaded() {
+
+      // Get height and width.
+      ow.textContent =
+        "Outer Width = " + window.outerWidth;
+      iw.textContent =
+        "Inner Width = " + window.innerWidth;
+      oh.textContent =
+        "Outer Height = " + window.outerHeight;
+      ih.textContent =
+        "Inner Height = " + window.innerHeight;
+
+      // Start game loop.
+      gameLoop();
+    }
+
+     // Game loop
+    function gameLoop() {
+
+      // Repeat game loop infinitely.
+      window.requestAnimationFrame(gameLoop);
+
+      // Move the ball once.
+      ballMove();
+    }
+
+     // Calculate and move the ball.
+    function ballMove() {
+
+      // Changes are calculated but do not
+      // take effect until next time.
+      myBall.style.left = ballHor + "px";
+      myBall.style.top = ballVer + "px";
+
+      // Calculate new vertical component.
+      ballVer = ballVer + changeVer;
+
+      // Top hit, reverse direction.
+      if (ballVer + changeVer < -10)
+        changeVer = -changeVer;
+
+      // Bottom hit, reverse direction.
+      if (ballVer + changeVer >
+        boardHeight - 10)
+        changeVer = -changeVer;
+
+      // Calculate new horizontal component.
+      ballHor = ballHor + changeHor;
+
+      // Left edge hit, reverse direction.
+      if (ballHor + changeHor < -10)
+        changeHor = -changeHor;
+
+      // Right edge hit, reverse direction.
+      if (ballHor + changeHor >
+        boardWidth - 10)
+        changeHor = -changeHor;
+    }
+
+     // Changes board size to match new.
+    function resizeMe() {
+
+      //Change board size.
+      boardWidth = window.innerWidth;
+      boardHeight = window.innerHeight;
+
+      // Get height and width.
+      ow.textContent =
+        "Outer Width = " + window.outerWidth;
+      iw.textContent =
+        "Inner Width = " + window.innerWidth;
+      oh.textContent =
+        "Outer Height = " + window.outerHeight;
+      ih.textContent =
+        "Inner Height = " + window.innerHeight;
+    }
+  </script>
+
+</head>
+
+<body style="background-color: Peru">
+
+  <h3>Width</h3>
+  <p id="ow">Outer Width = 1296</p>
+  <p id="iw">Inner Width = 1280</p>
+  <h3>Height</h3>
+  <p id="oh">Outer Height = 1010</p>
+  <p id="ih">Inner Height = 874</p>
+
+  <footer>
+    <small>
+      Copyright © 2024 Seth McEvoy
+    </small>
+  </footer>
+
+</body>
+
+</html>
